@@ -1,0 +1,64 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}
+Quartos
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'Hotel/css/quartos.css' %}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+{% endblock %}
+
+{% block body %}
+<main class="quartos-wrapper">
+    <h2>Lista de Quartos</h2>
+    <div class="quartos-grid">
+        {% for q in quartos %}
+        <div class="quarto-card {% if not q.status %}reservado{% endif %}">
+            <img src="{{ q.img.url }}" alt="Imagem do quarto {{ q.num_quarto }}">
+            <div class="info">
+                <h3>Quarto {{ q.num_quarto }} - {{ q.tipo }}</h3>
+                <p class="text-quartos"><strong class="negrito">Capacidade:</strong> {{ q.qnt_hospedes }} hóspede(s)</p>
+                <p class="text-quartos"><strong class="negrito">Valor:</strong> R$ {{ q.valor|floatformat:2 }}</p>
+                <p class="text-quartos">{{ q.descricao }}</p>
+                <p class="text-quartos"><strong class="negrito">Status:</strong>
+                    {% if q.status %}
+                    Disponível
+                    {% else %}
+                    Reservado
+                    {% endif %}
+                </p>
+
+                {% if user.is_authenticated and user.groups.all.0.name in 'GerenteColaborador' %}
+                {% if q.status %}
+                <a href="{% url 'reservar_quarto' q.id %}" class="reservar-btn">Reservar</a>
+                {% else %}
+                <form method="post" action="{% url 'liberar_quarto' q.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="liberar-btn">Liberar Quarto</button>
+                </form>
+                {% endif %}
+                <!-- Esse link aparece SEMPRE -->
+                <a class="detalhes-btn" href="{% url 'detalhes_quarto' q.id %}">Ver detalhes</a>
+                {% endif %}
+
+                {% if user.groups.all.0.name == 'Gerente' %}
+                <form method="post" action="{% url 'excluir_quarto' q.id %}"
+                    onsubmit="return confirm('Tem certeza que deseja excluir este quarto?');">
+                    {% csrf_token %}
+                    <button type="submit" class="excluir-btn">Excluir Quarto</button>
+                </form>
+                {% endif %}
+
+
+
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</main>
+{% endblock %}

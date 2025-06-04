@@ -1,0 +1,110 @@
+/* Existing CSS */
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+.form-container {
+    width: 600px;
+    margin: 60px auto;
+    background: white;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: 500;
+    display: block;
+    margin-bottom: 6px;
+    color: #333;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #bbb;
+    border-radius: 6px;
+}
+
+.submit-button {
+    width: 100%;
+    padding: 14px;
+    background-color: #28a745;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.submit-button:hover {
+    background-color: #218838;
+}
+
+header, footer {
+    background-color: #1e3a4c;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+footer {
+    font-size: 14px;
+}
+
+.title-login{
+    font-family:'Poppins';
+}
+
+/* --- Drag and Drop Specific Styles --- */
+.drag-drop-zone {
+    border: 2px dashed #ccc; /* Dashed border for visual cue */
+    padding: 20px;
+    text-align: center;
+    cursor: pointer; /* Indicate it's clickable */
+    transition: background-color 0.3s ease, border-color 0.3s ease; /* Smooth transitions */
+    min-height: 150px; /* Ensure enough space */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px; /* Slightly rounded corners */
+    background-color: #fdfdfd; /* Light background */
+}
+
+.drag-drop-zone.dragover {
+    background-color: #e6f7ff; /* Lighter blue on drag over */
+    border-color: #007bff; /* Blue border on drag over */
+}
+
+.drag-drop-zone p {
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 10px; /* Space between text and potential preview */
+}
+
+.drag-drop-zone input[type="file"] {
+    opacity: 0; /* Hide the default file input visually */
+    position: absolute; /* Take it out of normal flow */
+    width: 1px; /* Make it tiny */
+    height: 1px; /* Make it tiny */
+    overflow: hidden; /* Hide overflow */
+    z-index: -1; /* Ensure it doesn't block clicks */
+}
+
+.image-preview {
+    max-width: 100%;
+    max-height: 120px; /* Adjust as needed for preview size */
+    margin-top: 15px; /* Space between text/input and preview */
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}

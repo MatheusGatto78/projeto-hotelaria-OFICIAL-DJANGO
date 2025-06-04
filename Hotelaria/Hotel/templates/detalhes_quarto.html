@@ -1,0 +1,38 @@
+{% extends 'index.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block title %}Detalhes do Quarto{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'Hotel/css/detalhesQuarto.css' %}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+{% endblock %}
+
+{% block body %}
+
+<div class="full">
+    <main class="detalhes-quarto">
+        <h2>Detalhes do Quarto {{ quarto.num_quarto }}</h2>
+        <img src="{{ quarto.img.url }}" alt="Imagem do quarto">
+        <p><strong>Tipo:</strong> {{ quarto.tipo }}</p>
+        <p><strong>Capacidade:</strong> {{ quarto.qnt_hospedes }} hóspedes</p>
+        <p><strong>Valor:</strong> R$ {{ quarto.valor|floatformat:2 }}</p>
+        <p><strong>Status:</strong> {% if quarto.status %}Disponível{% else %}Reservado{% endif %}</p>
+        <p><strong>Descrição:</strong> {{ quarto.descricao }}</p>
+        
+        {% if not quarto.status and reserva %}
+        <p><strong>Cliente:</strong> {{ reserva.nome_cliente }} | <strong>Telefone:</strong> {{ reserva.telefone_cliente }}</p>
+        <p><strong>Data da Reserva:</strong> {{ reserva.data_reserva|date:"d/m/Y H:i" }}</p>
+        {% endif %}
+        
+        {% if user|has_group:"Gerente" %}
+        <a href="{% url 'editar_quarto' quarto.id %}">Editar informações</a>
+        {% endif %}
+    </main>
+</div>
+
+{% endblock %}

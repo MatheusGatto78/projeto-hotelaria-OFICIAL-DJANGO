@@ -1,0 +1,31 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}
+    HOMEPAGE
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'Hotel/css/Homepage.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    <div class="homepage-container">
+        {% for dados in dados_home %}
+            <div class="homepage-card">
+                <h1 class="homepage-title">{{dados.titulo}}</h1>
+                <div class="homepage-content">
+                    <div class="homepage-text">
+                        <p class="homepage-description">{{dados.descricao}}</p>
+                    </div>
+                    <div class="homepage-image">
+                        <img src="{{dados.logo.url}}" alt="{{dados.titulo}}" class="homepage-logo">
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

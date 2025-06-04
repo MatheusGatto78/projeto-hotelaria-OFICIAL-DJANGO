@@ -1,0 +1,66 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}
+    ADD QUARTO
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'Hotel/css/addQuarto.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+
+    <form action="/addquarto" method="POST" enctype="multipart/form-data" class="form-container">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="id_num_quarto">Número do Quarto:</label>
+            {{ form.num_quarto }}
+        </div>
+
+        <div class="form-group">
+            <label for="qtd_hospedes">Quantidade de Hóspedes:</label>
+            {{ form.qnt_hospedes }}
+        </div>
+
+        <div class="form-group">
+            <label for="tipo_quarto">Tipo:</label>
+            {{ form.tipo }}
+        </div>
+
+        <div class="form-group">
+            <label for="valor_quarto">Valor:</label>
+            {{ form.valor }}
+        </div>
+
+        <div class="form-group">
+            <label for="desc_quarto">Descrição do Quarto:</label>
+            {{ form.descricao }}
+        </div>
+
+        <div class="form-group">
+            <label for="status_quarto">Status do Quarto:</label>
+            {{ form.status }}
+        </div>
+
+        <div class="form-group">
+            <label for="img_quarto">Imagem do Quarto:</label>
+            <div id="drag-drop-zone" class="drag-drop-zone">
+                <p>Arraste e solte sua imagem aqui, ou clique para selecionar.</p>
+                {{ form.img }}
+            </div>
+        </div>
+
+        <button type="submit" class="submit-button">Cadastrar</button>
+    </form>
+            
+{% endblock %}
+
+{% block extra_js %}
+    {# This script is loaded only on the add_quartos page #}
+    <script src="{% static 'static/Hotel/js/drag_drop.js' %}"></script>
+{% endblock %}
